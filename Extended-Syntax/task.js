@@ -1,4 +1,4 @@
-
+"use strict"
 
 function calculateQuadraticEquation(){
     let a = +window.a.value;
@@ -11,8 +11,27 @@ function calculateQuadraticEquation(){
 }
 
 function getResult(a,b,c){
-    // код для задачи №1 писать здесь
-    //return x;
+    let x,
+        D,
+        xOne,
+        xTwo;
+
+    a * x**2 + b * x + c == 0;
+
+    D = b ** 2 - 4*a*c;
+
+    if (D > 0) {
+        xOne = -b + Math.sqrt(D)/2*a;
+        xTwo = -b - Math.sqrt(D)/2*a;
+
+        x = 'x1 = ' + xOne + '; x2 = ' + xTwo;
+    } else if (D == 0) {
+        x = -b / 2 * a; 
+    } else {
+        x = 'Уровенение не имее корней';
+    }
+
+    return x;
 }
 
 function calculateDrinkTask(){
@@ -23,9 +42,19 @@ function calculateDrinkTask(){
 }
 
 function askDrink(name,dateOfBirthday){
-    // код для задачи №2 писать здесь
-    //console.log(result)
-    //return result;
+    let age = new Date(),
+        result,
+        resultAge;
+
+    resultAge = age.getFullYear() - dateOfBirthday.getFullYear();
+    if (resultAge >= 18) {
+        result = `Не желаете ли олд-фэшн, ${name}?`;
+    } else {
+        result = `Сожалею, ${name}?, но я не могу вам продать алкоголь. Зато могу предложить вам замечательный клюквенный компот!`;
+    }
+
+    console.log(result)
+    return result;
 }
 
 function calculateAverageRating(){
@@ -35,6 +64,20 @@ function calculateAverageRating(){
 }
 
 function getAverageMark(marks){
-    // код для задачи №3 писать здесь
-    //return averageMark;
+    let marksSumm = 0;
+    let averageMark = 0;
+    if (marks.length >= 5) {
+        for (let i = 0; 5 >= i; i++) {
+            marksSumm = marksSumm + marks[i];
+        }
+    
+        averageMark = marksSumm / marks.length;
+    } else {
+        for (let i = 0; marks.length > i; i++) {
+            marksSumm = marksSumm + marks[i];
+        }
+    
+        averageMark = marksSumm / marks.length;
+    }   
+    return averageMark;
 }
