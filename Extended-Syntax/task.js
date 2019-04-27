@@ -63,21 +63,26 @@ function calculateAverageRating(){
     window.averageMark.textContent = averageMark;
 }
 
-function getAverageMark(marks){
-    let marksSumm = 0;
+function getAverageMark(marks){    
     let averageMark = 0;
-    if (marks.length >= 5) {
-        for (let i = 0; 5 >= i; i++) {
-            marksSumm = marksSumm + marks[i];
+
+    if (marks.length > 5) {
+        let marksSumm = marks.splice(',', 5);
+
+        for (let i=0; marksSumm.length > i; i++) {
+            averageMark += marksSumm[i];
         }
-    
-        averageMark = marksSumm / marks.length;
+
+        averageMark = averageMark / 5;
+        console.log('Оценок больше 5');
+        
     } else {
-        for (let i = 0; marks.length > i; i++) {
-            marksSumm = marksSumm + marks[i];
+        for (let i=0; marks.length > i; i++) {
+            averageMark += marks[i];
         }
-    
-        averageMark = marksSumm / marks.length;
-    }   
+
+        averageMark = averageMark / marks.length;
+    }
+
     return averageMark;
 }
