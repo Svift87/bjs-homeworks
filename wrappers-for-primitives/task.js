@@ -1,3 +1,5 @@
+'use strict'
+
 function calculateMortgage() {
     let percent = window.percent.value;
     let contribution = window.contribution.value;
@@ -10,9 +12,19 @@ function calculateMortgage() {
 }
 
 function calculateTotalMortgage(percent, contribution, amount, date) {
+    let summaBank = amount - contribution;
 
-    // код для задачи №1 писать здесь
-    //return totalAmount;
+    date = Date.parse(date) - Date.parse(new Date());
+
+    let dateMonth = Math.floor(date/1000/60/60/24/30); // Нашел количество месяц с текущей даты
+
+    let percentMonth = percent / 12 / 100; // Нашел процент за месяц
+
+    let totalAmount = summaBank * ( percentMonth + percentMonth / (Math.pow((1 + percentMonth), dateMonth) - 1) );
+
+    // Помогите не могу понять где я ошибся в формуле?? 
+
+    return totalAmount;
 }
 
 function sayHello() {
@@ -23,6 +35,11 @@ function sayHello() {
 }
 
 function getGreeting(name) {
-    // код для задачи №2 писать здесь
-    //return greeting;
+    if (name == '' || name == 'null' || name == 'undefined') {
+        name = 'Аноним';
+    }
+
+    let greeting = `Привет, мир! Меня зовут ${name}`;
+    
+    return greeting;
 }
