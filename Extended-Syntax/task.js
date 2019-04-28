@@ -67,22 +67,14 @@ function getAverageMark(marks){
     let averageMark = 0;
 
     if (marks.length > 5) {
-        let marksSumm = marks.splice(',', 5);
-
-        for (let i=0; marksSumm.length > i; i++) {
-            averageMark += marksSumm[i];
-        }
-
-        averageMark = averageMark / 5;
-        console.log('Оценок больше 5');
-        
-    } else {
-        for (let i=0; marks.length > i; i++) {
-            averageMark += marks[i];
-        }
-
-        averageMark = averageMark / marks.length;
+        console.log('Оценок больше 5');        
     }
 
-    return averageMark;
+    let marksSumm = marks.splice(',', 5);
+
+    for (let i=0; marksSumm.length > i; i++) {
+        averageMark += marksSumm[i];
+    }
+    
+    return averageMark = averageMark / marksSumm.length;
 }
