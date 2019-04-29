@@ -78,3 +78,23 @@ function getAverageMark(marks){
     
     return averageMark = averageMark / marksSumm.length;
 }
+
+let d = function(nums, k) {  
+    for (let i = 0; nums.length > i; i++) {
+        for (let b = 0; nums.length > b; b++) {
+            if (nums[i] + nums[b] == k) {
+                return;
+            }                   
+        }
+    }
+ }
+
+ d([10, 15, 3, 7], 17);
+
+let a = function merge(nums1, m, nums2, n) {
+   let test = nums1.splice(0, m).concat(nums2);
+   test.sort();
+   console.log(test);
+}
+
+a([46,55,88,0,0,0,0], 3, [18,29,80,90], 4);

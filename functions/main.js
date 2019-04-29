@@ -36,19 +36,12 @@ function showSolutionsMessage(a, b, c) {
 };
 
 function getAverageScore( data ) {
-
-    for (let valueData in data) {
-        data[valueData] = averageValueArr(data[valueData]);    
-    }
-
-    averageValueArr (data);
-       
-    console.log(data);
-    
     let arre = 0;
 
-    for (let valueData in data) {
-        arre += data[valueData];    
+    for (let valueData in data) {        
+        data[valueData] = averageValueArr(data[valueData]);    
+        averageValueArr (data);
+        arre += data[valueData]; 
     }
 
     let summaKey = Object.keys(data).length;
@@ -59,14 +52,6 @@ function getAverageScore( data ) {
 };
 
 function averageValueArr (dataResult) {
-    // for (let valueData in data) {
-    //     let arr = data[valueData];    
-    //     let result = arr.reduce(function(sum, current) {
-    //         return sum + current;
-    //     }, 0);
-    //     data[valueData] = result / arr.length;
-    // }
-
     let summData = 0;
 
     for (let i = 0; dataResult.length > i; i++) {
@@ -74,7 +59,6 @@ function averageValueArr (dataResult) {
     }
   
     return dataResult = summData / dataResult.length;
-
 };
 
 getAverageScore({
@@ -90,7 +74,6 @@ getAverageScore({
 });
 
 function getPersonData (secretData) {
-    replacementValues(secretData);
     let newSecretData = {};
 
     for (let valueSecretData in secretData) {
@@ -104,8 +87,7 @@ function getPersonData (secretData) {
     console.log(newSecretData);
 };
 
-function replacementValues (secretData) {
-    
+function replacementValues (secretData) {    
     if (secretData == 0) {
         secretData = 'Родриго';
     } else if (secretData == 1) {
