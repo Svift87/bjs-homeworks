@@ -6,9 +6,20 @@ function initCheckBirthday() {
     document.getElementById('disclaimer').innerHTML = result;   
 }
 
+const now = +new Date();
+console.log(now)
+
 function checkBirthday(birthday) {
-    // код для задачи №1 писать здесь
+    const now = +new Date();
+    birthday = +new Date(birthday);
+    let diff = now - birthday;    
+    age = Math.floor(diff / 1000 / 60 / 60 / 24 / 30 / 12);
+
+    if (age >= 18) {
+        return 'есть 18!';
+    }
 }
+
 
 function initPrintAnimalSound() {
     const animal = {
@@ -21,7 +32,12 @@ function initPrintAnimalSound() {
 }
 
 function getAnimalSound(animal) {
-    // код для задачи №2 писать здесь
+    const sound = animal.sound;
+    if (animal == undefined) {
+        return null;
+    } else {                
+        return sound;
+    }    
 }
 
 function initCalculateStatement() {
@@ -35,5 +51,13 @@ function initCalculateStatement() {
 }
 
 function getAverageMark(marks) {
-    // код для задачи №3 писать здесь
+    let average = 0;
+
+    for (let i = 0; marks.length > i; i++) {
+        average += +marks[i];
+    }    
+
+    const roundedAverage = Math.round(average / marks.length);
+    
+    return roundedAverage;
 }
