@@ -4,50 +4,40 @@ class Weapon {
         this.name = name;
         this.attack = attack;
         this.durability = durability;
-        this.range = range;
-        const startDurability = this.durability;
+        this.range = range;   
+        
+        this.percentStrength = this.durability * 0.3;
     }   
 
-    takeDamage(damage) {
-        
+    takeDamage(damage) {   
+        const startDurability = this.durability;     
+        this.durability -= damage;
+
         if (this.durability < 0) {
             return this.durability = 0;
         }
 
-        return this.durability -= damage;
+        return this.durability;
     }
 
-    getDamage() {        
-        let percentStrength = this.startDurability * 0.3;
-        if (this.durability >= percentStrength) {
+    getDamage() {                  
+        if (this.durability >= this.percentStrength) {
             return this.attack;
-        } else if (this.durability = 0) {
-            return 0;
-        } else {
+        } else if (this.durability <= this.percentStrength && this.durability > 0) {
             return this.attack / 2;
+        } else {
+            return 0;
         }
     }
 
     isBroken() {
-        
-        if (this.durability > 0) {
-            return false;
-        } else {
-            return true;
-        }
+
+        return this.durability == 0;
     }
 }
 
 class improvedWeapon extends Weapon {
-    constructor (name, heirName, attack, durability, range) {
-        super(name, heirName, attack, durability, range)
-        
-        this.name = name;
-        this.heirName = heirName;
-        this.attack = attack;
-        this.durability = durability;
-        this.range = range;
-    }
+    
 };
 
 class Arm extends Weapon {
@@ -65,16 +55,48 @@ class Knife extends Weapon {
 class Staff extends Weapon {
 };
 
-class improvedBow extends improvedWeapon {
+class improvedBow extends Bow {
+    constructor (name, heirName, attack, durability, range) {
+        super(name, heirName, attack, durability, range)
+        this.heirName = heirName;
+        this.name = name;        
+        this.attack = attack;
+        this.durability = durability;
+        this.range = range;
+    }
 };
 
-class improvedSword extends improvedWeapon {
+class improvedSword extends Sword {
+    constructor (name, heirName, attack, durability, range) {
+        super(name, heirName, attack, durability, range)
+        this.heirName = heirName;
+        this.name = name;        
+        this.attack = attack;
+        this.durability = durability;
+        this.range = range;
+    }
 };
 
-class improvedKnife extends improvedWeapon {
+class improvedKnife extends Knife {
+    constructor (name, heirName, attack, durability, range) {
+        super(name, heirName, attack, durability, range)
+        this.heirName = heirName;
+        this.name = name;        
+        this.attack = attack;
+        this.durability = durability;
+        this.range = range;
+    }
 };
 
-class improvedStaff extends improvedWeapon {
+class improvedStaff extends Staff {
+    constructor (name, heirName, attack, durability, range) {
+        super(name, heirName, attack, durability, range)
+        this.heirName = heirName;
+        this.name = name;        
+        this.attack = attack;
+        this.durability = durability;
+        this.range = range;
+    }
 };
 
 const arm = new Arm('Рука', 1, Infinity, 1);
@@ -91,38 +113,32 @@ const longStaff = new improvedStaff('Посох Бури', 'Посох', 10, 300
 
 class StudentLog {
     constructor (name) {
-        this.name = name;
-        this.grade = [];
+        this.name = name;  
+        this.academicPerformance = {
+            subject: '',
+            grades: []
+        };      
     }
  
     getName () {
-        console.log(this.name);        
+        return this.name;        
     }
 
-    addGrade(grade, subject) {           
-        this.grade.push(grade);
-        this.subject = subject;
-        for (let i = 0; this.grade.length > i; i++) {
-            if (this.grade[i] < 1 && this.grade[i] > 5 || this.grade[i] == String) {            
-                console.log(`Вы пытались поставить оценку ${this.grade[i]} по предмету ${this.subject}. Допускаются только числа от 1 до 5.`);
-                this.grade.splice(i-1, 1);
-            }
-        }    
-
-        console.log(this.grade.length);        
+    addGrade(grade, subject) {        
+        this.academicPerformance.grades.push(grade);
+        this.academicPerformance.subject = subject;
     }
 
-    getAverageBySubject(subject) {
-        if ( this.grade.length === 0 ) {
-            console.log(0);
+    getAverageBySubject() {
+        if ( this.academicPerformance.grades.length === 0 ) {
+            return 0;
         }
         let sum = 0;
       
-        for (let rating of this.grade) {
+        for (let rating of this.academicPerformance.grades) {
             sum += rating;
         }
-        console.log(sum / this.grade.length);
-            
+        return sum / this.academicPerformance.grades.length;            
     }
 }
 
@@ -134,10 +150,6 @@ Natasha.addGrade(4, 'Математика');
 Natasha.addGrade(3, 'Математика');
 Natasha.addGrade(2, 'Математика');
 
-Natasha.addGrade(5, 'фра');
-Natasha.addGrade(5, 'фра');
-Natasha.addGrade(5, 'фра');
-Natasha.addGrade(5, 'фра');
+// Как создать новый объект academicPerformance при изменении предмета? 
+// Если я пишу Natasha.addGrade(2, 'Фра'); то соответственно значение subject перезаписывается
 
-
-// Гдето что то пошло не так и я запутался, возможно стоит послностью переписать задачу, но если поможете разобраться будет лучше
