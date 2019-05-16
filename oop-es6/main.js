@@ -9,8 +9,7 @@ class Weapon {
         this.percentStrength = this.durability * 0.3;
     }   
 
-    takeDamage(damage) {   
-        const startDurability = this.durability;     
+    takeDamage(damage) {  
         this.durability -= damage;
 
         if (this.durability < 0) {
@@ -36,67 +35,64 @@ class Weapon {
     }
 }
 
-class improvedWeapon extends Weapon {
-    
-};
-
 class Arm extends Weapon {
+    constructor() {
+        super('Рука', 1, Infinity, 1);   
+    } 
 };
 
 class Bow extends Weapon {
+    constructor() {
+        super('Лук', 10, 200, 3);   
+    }  
 };
 
 class Sword extends Weapon {
+    constructor() {
+        super('Меч', 25, 500, 1);   
+    } 
 };
 
 class Knife extends Weapon {
+    constructor() {
+        super('Нож', 5, 300, 1);   
+    } 
 };
 
 class Staff extends Weapon {
+    constructor() {
+        super('Посох', 8, 300, 21);   
+    } 
 };
 
 class improvedBow extends Bow {
-    constructor (name, heirName, attack, durability, range) {
-        super(name, heirName, attack, durability, range)
-        this.heirName = heirName;
-        this.name = name;        
-        this.attack = attack;
-        this.durability = durability;
-        this.range = range;
+    constructor() {
+        super();   
+        this.name = 'Длинный лук';    
+        this.versionWeapon = 'Лук';  
+        this.attack = 15;
+        this.range = 4;   
     }
 };
 
 class improvedSword extends Sword {
-    constructor (name, heirName, attack, durability, range) {
-        super(name, heirName, attack, durability, range)
-        this.heirName = heirName;
-        this.name = name;        
-        this.attack = attack;
-        this.durability = durability;
-        this.range = range;
-    }
-};
-
-class improvedKnife extends Knife {
-    constructor (name, heirName, attack, durability, range) {
-        super(name, heirName, attack, durability, range)
-        this.heirName = heirName;
-        this.name = name;        
-        this.attack = attack;
-        this.durability = durability;
-        this.range = range;
+    constructor() {
+        super();   
+        this.name = 'Секира';    
+        this.versionWeapon = 'Меч';  
+        this.attack = 27;
+        this.durabilityInitial = 800;
     }
 };
 
 class improvedStaff extends Staff {
-    constructor (name, heirName, attack, durability, range) {
-        super(name, heirName, attack, durability, range)
-        this.heirName = heirName;
-        this.name = name;        
-        this.attack = attack;
-        this.durability = durability;
-        this.range = range;
-    }
+    constructor() {
+        super();   
+        this.name = 'Посох Бури';    
+        this.versionWeapon = 'Посох';  
+        this.attack = 10;
+        this.range = 3;     
+    }  
 };
 
 const arm = new Arm('Рука', 1, Infinity, 1);
@@ -105,40 +101,39 @@ const sword = new Sword('Меч', 25, 500, 1);
 const knife = new Knife('Нож', 5, 300, 1);
 const staff = new Staff('Посох', 8, 300, 2);
 
-const longBow = new improvedBow('Длинный лук', 'Лук', 15, 200, 4);
-const longSword = new improvedSword('Секира', 'Меч', 27, 800, 1);
-const longStaff = new improvedStaff('Посох Бури', 'Посох', 10, 300, 3);
+const longBow = new improvedBow('Длинный лук', 'Лук', 15, 4);
+const longSword = new improvedSword('Секира', 'Меч', 27, 800);
+const longStaff = new improvedStaff('Посох Бури', 'Посох', 10, 3);
 
 // задание 3
 
 class StudentLog {
     constructor (name) {
-        this.name = name;  
+        this.name = name;        
         this.academicPerformance = {
-            subject: '',
-            grades: []
-        };      
+
+        }; 
     }
  
     getName () {
         return this.name;        
     }
 
-    addGrade(grade, subject) {        
-        this.academicPerformance.grades.push(grade);
-        this.academicPerformance.subject = subject;
+    addGrade(grade, subject) {          
+        this.academicPerformance[subject] = [];
+        this.academicPerformance[subject].push(grade) // Почему не хочет записывать все оценки?
     }
 
-    getAverageBySubject() {
-        if ( this.academicPerformance.grades.length === 0 ) {
+    getAverageBySubject(subject) {
+        if ( this.academicPerformance[subject].length === 0 ) {
             return 0;
         }
         let sum = 0;
-      
-        for (let rating of this.academicPerformance.grades) {
+        
+        for (let rating of this.academicPerformance[subject]) {
             sum += rating;
         }
-        return sum / this.academicPerformance.grades.length;            
+        return sum / this.scores.length;                     
     }
 }
 
@@ -148,8 +143,8 @@ Natasha.getName();
 Natasha.addGrade(5, 'Математика');
 Natasha.addGrade(4, 'Математика');
 Natasha.addGrade(3, 'Математика');
-Natasha.addGrade(2, 'Математика');
-
-// Как создать новый объект academicPerformance при изменении предмета? 
-// Если я пишу Natasha.addGrade(2, 'Фра'); то соответственно значение subject перезаписывается
+Natasha.addGrade(4, 'Математика');
+Natasha.addGrade(2, 'Фра');
+Natasha.addGrade(5, 'Фра');
+Natasha.addGrade(5, 'Фра');
 
