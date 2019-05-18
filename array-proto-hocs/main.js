@@ -3,16 +3,13 @@ function compareArrays( arr1, arr2 ) {
         console.log(`Массивы ${arr1} и ${arr2} различаются`);
         return false;
     }
-    for (let i = 0; arr1.length > i; i++) {
-        if (arr1[i] == arr2[i]) {
-            console.log(`Массивы ${arr1} и ${arr2} идентичны`);
-            return true;
-            
-        } else {
-            console.log(`Массивы ${arr1} и ${arr2} различаются`);
-            return false;
-        }    
-    }
+	
+	function topFunc(e1, i) {
+		console.log(`Массивы ${arr1} и ${arr2} идентичны`);
+		return e1 === arr2[i];
+	}
+	console.log(`Массивы ${arr1} и ${arr2} различаются`);
+	return arr1.every(topFunc);
 }
 
 compareArrays([8, 9], [6]);
@@ -30,18 +27,18 @@ function memoize(fn, limit) {
 
 		if (a) {
 			return a.result;
-		} else {
-			results.unshift({
-				args,
-				result: fn(...rest)
-			})
-
-			if (results.length > limit) {
-				results.shift();
-			}
-
-			return results;
 		}
+
+		results.unshift({
+			args,
+			result: fn(...rest)
+		})
+
+		if (results.length > limit) {
+			results.shift();
+		}
+
+		return results;	
 	}
 }
 
@@ -58,4 +55,4 @@ let mSum = memoize(sum, 10);
 mSum(3, 4, 5, 6);
 mSum(3, 4, 5, 6);
 mSum(3, 4, 5);
-mSum(3, 4, 6);
+mSum(2, 3, 2);
